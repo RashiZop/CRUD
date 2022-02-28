@@ -1,4 +1,4 @@
-package conn_sql
+package store
 
 import(
 	"testing"
@@ -57,7 +57,7 @@ func TestAddEmp(t *testing.T) {
  
 	for _, testCase := range testCases {
 	   t.Run(testCase.desc, func(t *testing.T) {
-		  _, err := addEmp(Employee{testCase.Id, testCase.empOut.Name, testCase.empOut.Email, testCase.empOut.Role}, db)
+		  _, err := AddEmp(Employee{testCase.Id, testCase.empOut.Name, testCase.empOut.Email, testCase.empOut.Role}, db)
 		  
 		  if !reflect.DeepEqual(err, testCase.expectError) {
 			 t.Errorf("expected: %v, got: %v", testCase.expectError, err)
@@ -121,7 +121,7 @@ func TestEmpByID(t *testing.T) {
  
 	for _, testCase := range testCases {
 	   t.Run(testCase.desc, func(t *testing.T) {
-		  _, err := empByID(testCase.Id, db)
+		  _, err := EmpByID(testCase.Id, db)
 	
 		  if !reflect.DeepEqual(err, testCase.expectError) {
 			 t.Errorf("expected: %v, got: %v", testCase.expectError, err)
@@ -254,7 +254,7 @@ func TestEmpByID(t *testing.T) {
 		t.Run(testCase.desc, func(t *testing.T) {
 			prep.ExpectExec().WithArgs(testCase.Id).WillReturnResult(sqlmock.NewResult(0, 1))
 
-			err = delEmp(testCase.Id,db)
+			err = DelEmp(testCase.Id,db)
 			if !reflect.DeepEqual(err, testCase.expectError) {
 				t.Errorf("delete() error = %v, wantErr %v", err, testCase.expectError)
 				return
