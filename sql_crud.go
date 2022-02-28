@@ -1,6 +1,6 @@
 package conn_sql
 //package main
-//hgchg
+
 import(
 	_ "github.com/go-sql-driver/mysql"
 	//"time"
