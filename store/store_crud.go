@@ -18,16 +18,16 @@ type Employee struct{
 }
 
 //readById
-func EmpByID(Id int64, db *sql.DB)(Employee, error){
+func EmpByID(Id int64, db *sql.DB)(*Employee, error){
 	var emp Employee
 	
 	if(Id<0){
-		return emp, sql.ErrNoRows
+		return nil, sql.ErrNoRows
 	}
 
 	rows, err:=db.Query("Select * FROM employee1 WHERE Id = ?", Id)
 	if(err!=nil){
-		return emp, err
+		return &emp, err
 	}
 	
 	defer rows.Close()
@@ -35,11 +35,11 @@ func EmpByID(Id int64, db *sql.DB)(Employee, error){
 	for rows.Next(){
 		
 		if err:=rows.Scan(&emp.Id, &emp.Name, &emp.Email, &emp.Role); err!=nil{
-			return emp, err
+			return &emp, err
 		}
 
 	}
-	return emp, nil
+	return &emp, nil
 	
 }
 
@@ -53,14 +53,14 @@ func AddEmp(emp Employee, db *sql.DB)(Employee, error){
 	return emp, nil
 }
 
-func Employeeupdate(emp Employee, db *sql.DB) error {
-	_, err := db.Exec("UPDATE employee SET Name = ?, Email=?, Role=? WHERE ID = ?",
-	   &emp.Name, &emp.Email, &emp.Role, &emp.Id)
-	if err != nil {
-	   return errors.New("update failed")
-	}
-	return nil
- }
+// func Employeeupdate(emp Employee, db *sql.DB) error {
+// 	_, err := db.Exec("UPDATE employee SET Name = ?, Email=?, Role=? WHERE ID = ?",
+// 	   &emp.Name, &emp.Email, &emp.Role, &emp.Id)
+// 	if err != nil {
+// 	   return errors.New("update failed")
+// 	}
+// 	return nil
+//  }
 
 //deleteById
 func DelEmp(cond1 int64, db *sql.DB)(error){
