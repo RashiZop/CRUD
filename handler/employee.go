@@ -7,9 +7,17 @@ import(
 	"github.com/gorilla/mux"
 	_"github.com/go-sql-driver/mysql"
 	"strconv"
-	"golangprog/rest_api-mysql/store"
-	"golangprog/rest_api-mysql/driver"
+	"golangprog/rest_api-mysql/CRUD/store"
+	"golangprog/rest_api-mysql/CRUD/driver"
 )
+
+type Handler struct{
+	db *sql.DB
+}
+
+func NewStore (db *sql.DB) Store{
+	return Store{db: db}
+}
 
 //get
 func EmpByID(w http.ResponseWriter, r *http.Request){

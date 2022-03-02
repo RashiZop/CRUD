@@ -5,7 +5,7 @@ import(
 	"net/http"
 	"github.com/gorilla/mux"
 	_"github.com/go-sql-driver/mysql"
-	"golangprog/rest_api-mysql/handler"
+	"golangprog/rest_api-mysql/CRUD/handler"
 )
 
 func main(){

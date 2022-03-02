@@ -7,7 +7,7 @@ import(
 	//"fmt"
 	errored "errors"
 	"database/sql"
-	"golangprog/rest_api-mysql/driver"
+	//"golangprog/rest_api-mysql/CRUD/driver"
 )
 
 //test addEmp
@@ -286,13 +286,13 @@ func TestEmpByID(t *testing.T) {
 		  desc:      "update succes",
 		  expecterr: nil,
 		  input_emp: &Employee{1, "Rashi Singh", "rs@gmail.com", "Intern"},
-		  mockCall:  mock.ExpectExec("UPDATE employee SET Name = ?, Email=?, Role=? WHERE ID = ?").WithArgs("Rashi Singh", "rs@gmail.com", "Intern", 1).WillReturnResult(sqlmock.NewResult(1, 1)),
+		  mockCall:  mock.ExpectExec("UPDATE employee1 SET Name = ?, Email=?, Role=? WHERE ID = ?").WithArgs("Rashi Singh", "rs@gmail.com", "Intern", 1).WillReturnResult(sqlmock.NewResult(1, 1)),
 	   },
 	   {
 		  desc:      "update fail",
 		  expecterr: updaterr,
 		  input_emp: &Employee{3, "", "", ""},
-		  mockCall:  mock.ExpectExec("UPDATE employee SET Name=?,Email=?,Role=? WHERE ID = ?").WithArgs("", "", "", 3).WillReturnError(updaterr),
+		  mockCall:  mock.ExpectExec("UPDATE employee1 SET Name=?,Email=?,Role=? WHERE ID = ?").WithArgs("", "", "", 3).WillReturnError(updaterr),
 	   },
 	}
 	for _, tc := range tests {
