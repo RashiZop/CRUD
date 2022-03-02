@@ -53,14 +53,14 @@ func AddEmp(emp Employee, db *sql.DB)(Employee, error){
 	return emp, nil
 }
 
-// func Employeeupdate(emp Employee, db *sql.DB) error {
-// 	_, err := db.Exec("UPDATE employee SET Name = ?, Email=?, Role=? WHERE ID = ?",
-// 	   &emp.Name, &emp.Email, &emp.Role, &emp.Id)
-// 	if err != nil {
-// 	   return errors.New("update failed")
-// 	}
-// 	return nil
-//  }
+func Employeeupdate(emp Employee, db *sql.DB) error {
+	_, err := db.Exec("UPDATE employee1 SET Name = ?, Email=?, Role=? WHERE ID = ?",
+	   &emp.Name, &emp.Email, &emp.Role, &emp.Id)
+	if err != nil {
+	   return errors.New("update failed")
+	}
+	return nil
+ }
 
 //deleteById
 func DelEmp(cond1 int64, db *sql.DB)(error){
